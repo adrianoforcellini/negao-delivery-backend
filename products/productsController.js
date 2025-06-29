@@ -17,7 +17,7 @@ router.post(`/${process.env.POST_ROUTE}`, async (req, res) => {
 
     try {
         await Products.create(product);
-        res.status(201).json({ message: "product created" });
+        res.status(201).json({ message: "Produto criado com sucesso.", product });
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -34,7 +34,7 @@ router.put(`/${process.env.PUT_ROUTE}/:id`, async (req, res) => {
         if (updateProduct.modifiedCount === 1) {
             res
                 .status(200)
-                .json({ message: "Sucesso. Produto atualizado", product: product });
+                .json({ message: "Sucesso. Produto atualizado", product });
         }
         res
             .status(400)
@@ -62,6 +62,7 @@ router.delete(`/${process.env.DELETE_ROUTE}/:id`, async (req, res) => {
             .json({
                 message: "Houve uma falha. Verifique se o id está correto ",
             });
+
     } catch (error) {
         res.status(500).json({ error });
     }
