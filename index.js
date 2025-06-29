@@ -11,6 +11,9 @@ app.use(cors());
 const productsController = require("./products/productsController");
 app.use("/products", productsController);
 
+const usersController = require("./products/usersController");
+app.use("/users", usersController);
+
 mongoose
     .connect(
         `mongodb+srv://${process.env.MONGOOSE_CONNECTION_STRING}/?retryWrites=true&w=majority&appName=Negaodelivery`

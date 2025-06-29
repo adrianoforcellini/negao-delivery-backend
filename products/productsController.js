@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post(`/${process.env.POST_ROUTE}`, async (req, res) => {
+router.post(`/${process.env.PRODUCTS_POST_ROUTE}`, async (req, res) => {
     const { name, description, price, img_url, stock } = req.body;
     const product = { name, description, price, img_url, stock }
 
@@ -23,11 +23,10 @@ router.post(`/${process.env.POST_ROUTE}`, async (req, res) => {
     }
 });
 
-router.put(`/${process.env.PUT_ROUTE}/:id`, async (req, res) => {
+router.put(`/${process.env.PRODUCTS_PUT_ROUTE}/:id`, async (req, res) => {
     const id = req.params.id;
     const { name, description, price, img_url, stock } = req.body;
     const product = { name, description, price, img_url, stock }
-    console.log(id)
 
     try {
         const updateProduct = await Products.updateOne({ _id: id }, product);
@@ -46,7 +45,7 @@ router.put(`/${process.env.PUT_ROUTE}/:id`, async (req, res) => {
     }
 });
 
-router.delete(`/${process.env.DELETE_ROUTE}/:id`, async (req, res) => {
+router.delete(`/${process.env.PRODUCTS_DELETE_ROUTE}/:id`, async (req, res) => {
     const id = req.params.id;
 
     try {
