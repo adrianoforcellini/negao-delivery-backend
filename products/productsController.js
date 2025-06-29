@@ -45,4 +45,27 @@ router.put(`/${process.env.PUT_ROUTE}/:id`, async (req, res) => {
         res.status(500).json({ error });
     }
 });
+
+router.delete(`/${process.env.DELETE_ROUTE}/:id`, async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const deleteProduct = await Products.deleteOne({ _id: id });
+
+        if (deleteProduct.deletedCount === 1) {
+            res
+                .status(200)
+                .json({ message: "Produto excluido com sucesso" });
+        }
+        res
+            .status(400)
+            .json({
+                message: "Houve uma falha. Verifique se o id está correto ",
+            });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
+
+
 module.exports = router;
