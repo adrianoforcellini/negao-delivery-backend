@@ -4,10 +4,15 @@ require("dotenv").config();
 
 
 
-router.get("/", async (req, res) => {
+router.get(`/${process.env.USERS_GET_ROUTE}`, async (req, res) => {
+   const { number, password } = req.body;
     try {
-        const users = await Users.find();
-        res.status(200).json({ users });
+      const user = await Users.findOne( { number });
+      if (user.password == password){
+          res.status(200).json("login aceito");
+      }else{
+          res.status(301).json("senha incorreta");
+      }
     } catch (erro) {
         res.status(500).json({ error });
     }
@@ -15,8 +20,8 @@ router.get("/", async (req, res) => {
 
 
 router.post(`/${process.env.USERS_POST_ROUTE}`, async (req, res) => {
-    const { name, email, password } = req.body;
-    const user = { name, email, password }
+    const { number, password } = req.body;
+    const user = { number, password }
 
     try {
         await Users.create(user);
@@ -28,8 +33,8 @@ router.post(`/${process.env.USERS_POST_ROUTE}`, async (req, res) => {
 
 router.put(`/${process.env.USERS_PUT_ROUTE}/:id`, async (req, res) => {
     const id = req.params.id;
-    const { name, email, password } = req.body;
-    const user = { name, email, password }
+    const { number, password } = req.body;
+    const user = {number, password }
 
     try {
         const updateUser = await Users.updateOne({ _id: id }, user);
