@@ -11,7 +11,7 @@ router.post(`/${process.env.USERS_GET_ROUTE}`, async (req, res) => {
       if (user.password == password){
           res.status(200).json("login aceito");
       }else{
-          res.status(301).json("senha incorreta");
+          res.status(200).json("senha incorreta");
       }
     } catch (erro) {
         res.status(500).json({ error });
