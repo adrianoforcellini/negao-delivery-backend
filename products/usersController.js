@@ -4,7 +4,7 @@ require("dotenv").config();
 
 
 
-router.get(`/${process.env.USERS_GET_ROUTE}`, async (req, res) => {
+router.post(`/${process.env.USERS_GET_ROUTE}`, async (req, res) => {
    const { number, password } = req.body;
     try {
       const user = await Users.findOne( { number });
